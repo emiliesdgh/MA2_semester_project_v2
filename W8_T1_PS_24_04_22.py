@@ -45,32 +45,32 @@ def accelerometer_effect(Thymio, node, motor_speed=50) :
 
 
     # GAUCHE
-    if accel[0]>0: #Thymio is blue when placed on one of its sides
+    if accel[0]>2: #Thymio is blue when placed on one of its sides
         Thymio.setLEDTop(node, [0,0,32])
         # on the side
-        Thymio.setSpeedLeft((22-accel[0])*motor_speed, node)
-        Thymio.setSpeedRight((22-accel[0])*motor_speed, node)
+        Thymio.setSpeedLeft(-((accel[0]-10)*(accel[0]-10)-100), node)
+        Thymio.setSpeedRight(-((accel[0]-10)*(accel[0]-10)-100), node)
 
     # DROITE
-    if accel[0]< 0: #Thymio is blue when placed on one of its sides
+    if accel[0]< -2: #Thymio is blue when placed on one of its sides
         Thymio.setLEDTop(node, [0,0,32])
         # on the side
-        Thymio.setSpeedLeft((accel[0]-22)*motor_speed, node)
-        Thymio.setSpeedRight((accel[0]-22)*motor_speed, node)
+        Thymio.setSpeedLeft(-((-accel[0]-10)*(-accel[0]-10)-100), node)
+        Thymio.setSpeedRight(-((-accel[0]-10)*(-accel[0]-10)-100), node)
 
     # DERRIERE
-    if accel[1]>0: #Thymio is red when placed on its front or backside
+    if accel[1]>2: #Thymio is red when placed on its front or backside
         Thymio.setLEDTop(node, [32,0,0])
         # on back
-        Thymio.setSpeedLeft((22-accel[1])*motor_speed, node)
-        Thymio.setSpeedRight((22-accel[1])*motor_speed, node)
+        Thymio.setSpeedLeft(-((accel[1]-10)*(accel[1]-10)-100), node)
+        Thymio.setSpeedRight(-((accel[1]-10)*(accel[1]-10)-100), node)
 
     # DEVANT
-    if accel[1]< 0: #Thymio is red when placed on its front or backside
+    if accel[1]< -2: #Thymio is red when placed on its front or backside
         Thymio.setLEDTop(node, [32,0,0])
         # on front
-        Thymio.setSpeedLeft((accel[1]-22)*motor_speed, node)
-        Thymio.setSpeedRight((accel[1]-22)*motor_speed, node)
+        Thymio.setSpeedLeft(-((-accel[1]-10)*(-accel[1]-10)-100), node)
+        Thymio.setSpeedRight(-((-accel[1]-10)*(-accel[1]-10)-100), node)
 
     if accel[2]>18 or accel[2]<-18: #Thymio is green when placed on its wheels or upside-down
         Thymio.setLEDTop(node, [0,32,0])

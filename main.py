@@ -92,8 +92,8 @@ while(1) :
 
     robot.setLEDTop(node, [32,32,32])
 
-    W8_T1_PS_24_04_19.accelerometer_effect(robot, node)
-    # W8_T1_PS_24_04_22.accelerometer_effect(robot, node)
+    # W8_T1_PS_24_04_19.accelerometer_effect(robot, node)
+    W8_T1_PS_24_04_22.accelerometer_effect(robot, node)
 
     # format = "%(asctime)s: %(message)s"
     # logging.basicConfig(format=format, level=logging.INFO,
