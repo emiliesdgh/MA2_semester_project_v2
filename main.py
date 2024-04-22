@@ -15,6 +15,7 @@ from classes import Thymio
 import W4_T1_PS_24_03_07
 import W6_T1_PS_24_03_30
 import W8_T1_PS_24_04_19
+import W8_T1_PS_24_04_22
 import W6_T1_PS_24_04_03
 
 client = ClientAsync()
@@ -92,6 +93,7 @@ while(1) :
     robot.setLEDTop(node, [32,32,32])
 
     W8_T1_PS_24_04_19.accelerometer_effect(robot, node)
+    # W8_T1_PS_24_04_22.accelerometer_effect(robot, node)
 
     # format = "%(asctime)s: %(message)s"
     # logging.basicConfig(format=format, level=logging.INFO,
