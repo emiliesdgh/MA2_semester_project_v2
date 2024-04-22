@@ -27,12 +27,14 @@ aw(node.wait_for_variables())
 
 # program = """
 # onevent StopnUnlock
+
 #     W6_T1_PS_24_03_30.setButtons(robot, 0)
 
 #     print(robot.button_center)
 #     W6_T1_PS_24_03_30.stop_program(robot, node, motor_speed=0)
 #     aw(node.unlock())
 # """
+
 
 # # The event data are obtained from variable event.args:
 # program = """
@@ -89,6 +91,8 @@ while(1) :
 
     robot.setLEDTop(node, [32,32,32])
 
+    W8_T1_PS_24_04_19.accelerometer_effect(robot, node)
+
     # format = "%(asctime)s: %(message)s"
     # logging.basicConfig(format=format, level=logging.INFO,
     #                     datefmt="%H:%M:%S")
@@ -117,7 +121,7 @@ while(1) :
 
     proxG = list(node["prox.ground.ambiant"]) + [0]
 
-    print(proxG[0])
+    # print(proxG[0])
     # print(proxG[1])
 
     
@@ -142,34 +146,34 @@ while(1) :
 
     # if (prox[5]>1000 and prox[6]>1000 and proxG[0]>10) :
     
-    W6_T1_PS_24_03_30.programBack(robot, node, client)
+    # W6_T1_PS_24_03_30.programBack(robot, node, client)
     
 
 # ######## DOUBLED COSTUME
 
     # if ((prox[5]>1000 and prox[6]<1000) or (prox[5]<1000 and prox[6]>1000)) :
 
-    W6_T1_PS_24_03_30.ext_interaction(robot, node, motor_speed=100, obs_threshold=500)
+    # W6_T1_PS_24_03_30.ext_interaction(robot, node, motor_speed=100, obs_threshold=500)
 
-    if (robot.button_forward and not(robot.buttonForward)) :
+    # if (robot.button_forward and not(robot.buttonForward)) :
 
-        W6_T1_PS_24_03_30.setButtons(robot, 0)
+    #     W6_T1_PS_24_03_30.setButtons(robot, 0)
 
-        robot.buttonForward = 1
-
-
-    elif (robot.button_forward and robot.buttonForward) :
-
-        robot.buttonForward = 0
-        robot.setLEDTop(node, [0,0,32])
-        aw(client.sleep(2))
+    #     robot.buttonForward = 1
 
 
-    if (robot.buttonForward) :
+    # elif (robot.button_forward and robot.buttonForward) :
 
-        # while (not robot.button_center) :
+    #     robot.buttonForward = 0
+    #     robot.setLEDTop(node, [0,0,32])
+    #     aw(client.sleep(2))
 
-        W6_T1_PS_24_03_30.programFront(robot, node, client)
+
+    # if (robot.buttonForward) :
+
+    #     # while (not robot.button_center) :
+
+    #     W6_T1_PS_24_03_30.programFront(robot, node, client)
 
 ########
 

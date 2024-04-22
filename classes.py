@@ -31,6 +31,10 @@ class Thymio :
 
         self.motor_left_speed=0
         self.motor_right_speed=0
+    
+    def getAccelerometer(self, node):
+        aw(node.wait_for_variables({"acc"}))
+        self.accelero = list(node.v.acc)
 
     def getProxHorizontal(self, node):
         aw(node.wait_for_variables({"prox.horizontal"}))
