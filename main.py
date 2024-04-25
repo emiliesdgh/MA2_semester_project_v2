@@ -87,6 +87,8 @@ def update_sensors_data(robot, node):
 
     # threadToStop.start()
 
+
+
 while(1) :
 
     # aw(client.sleep(0.1))
@@ -95,7 +97,9 @@ while(1) :
     robot.setLEDTop(node, [32,32,32])
 
     # W8_T1_PS_24_04_19.accelerometer_effect(robot, node)
-    fonctions.accelerometer_effect(robot, node)
+    # fonctions.accelerometer_effect(robot, node)
+
+    fonctions.microphone(robot,node,client,motor_speed=50)
 
     # format = "%(asctime)s: %(message)s"
     # logging.basicConfig(format=format, level=logging.INFO,

@@ -31,6 +31,8 @@ class Thymio :
 
         self.motor_left_speed=0
         self.motor_right_speed=0
+
+        self.microphone_set = 0
     
     def getAccelerometer(self, node):
         aw(node.wait_for_variables({"acc"}))
