@@ -77,3 +77,5 @@ def accelerometer_effect(Thymio, node, motor_speed=50) :
         # horizontal
         Thymio.setSpeedLeft(0, node)
         Thymio.setSpeedRight(0, node)
+
+        

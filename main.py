@@ -18,6 +18,8 @@ import W8_T1_PS_24_04_19
 import W8_T1_PS_24_04_22
 import W6_T1_PS_24_04_03
 
+import fonctions
+
 client = ClientAsync()
 node = aw(client.wait_for_node())
 # aw(node.unlock())
@@ -29,10 +31,10 @@ aw(node.wait_for_variables())
 # program = """
 # onevent StopnUnlock
 
-#     W6_T1_PS_24_03_30.setButtons(robot, 0)
+#     fonctions.setButtons(robot, 0)
 
 #     print(robot.button_center)
-#     W6_T1_PS_24_03_30.stop_program(robot, node, motor_speed=0)
+#     fonctions.stop_program(robot, node, motor_speed=0)
 #     aw(node.unlock())
 # """
 
@@ -93,7 +95,7 @@ while(1) :
     robot.setLEDTop(node, [32,32,32])
 
     # W8_T1_PS_24_04_19.accelerometer_effect(robot, node)
-    W8_T1_PS_24_04_22.accelerometer_effect(robot, node)
+    fonctions.accelerometer_effect(robot, node)
 
     # format = "%(asctime)s: %(message)s"
     # logging.basicConfig(format=format, level=logging.INFO,
@@ -114,10 +116,10 @@ while(1) :
     if (robot.button_center) :
 
         # robot.buttonForward = 0
-        W6_T1_PS_24_03_30.setButtons(robot, 0)
+        fonctions.setButtons(robot, 0)
 
         print(robot.button_center)
-        W6_T1_PS_24_03_30.stop_program(robot, node, motor_speed=0)
+        fonctions.stop_program(robot, node, motor_speed=0)
         aw(node.unlock())
         break
 
@@ -136,9 +138,9 @@ while(1) :
     #     update_sensors_data(robot, node)
     #     print(prox[2])
 
-    #     W6_T1_PS_24_04_03.see_costume(robot, node, motor_speed=50)
+    #     fonctions.see_costume(robot, node, motor_speed=50)
     # else :
-    #     W6_T1_PS_24_04_03.no_costume(robot, node, motor_speed=0)
+    #     fonctions.no_costume(robot, node, motor_speed=0)
     #     print(prox[2])
 
 ######## 05.04.2024
@@ -148,18 +150,18 @@ while(1) :
 
     # if (prox[5]>1000 and prox[6]>1000 and proxG[0]>10) :
     
-    # W6_T1_PS_24_03_30.programBack(robot, node, client)
+    # fonctions.programBack(robot, node, client)
     
 
 # ######## DOUBLED COSTUME
 
     # if ((prox[5]>1000 and prox[6]<1000) or (prox[5]<1000 and prox[6]>1000)) :
 
-    # W6_T1_PS_24_03_30.ext_interaction(robot, node, motor_speed=100, obs_threshold=500)
+    # fonctions.ext_interaction(robot, node, motor_speed=100, obs_threshold=500)
 
     # if (robot.button_forward and not(robot.buttonForward)) :
 
-    #     W6_T1_PS_24_03_30.setButtons(robot, 0)
+    #     fonctions.setButtons(robot, 0)
 
     #     robot.buttonForward = 1
 
@@ -175,19 +177,19 @@ while(1) :
 
     #     # while (not robot.button_center) :
 
-    #     W6_T1_PS_24_03_30.programFront(robot, node, client)
+    #     fonctions.programFront(robot, node, client)
 
 ########
 
     # if (robot.button_backward) :
 
-    #     W6_T1_PS_24_03_30.setButtons(robot, 0)
+    #     fonctions.setButtons(robot, 0)
 
     #     robot.buttonBackward = 1
 
     # if (robot.buttonBackward) :
 
-    #     W6_T1_PS_24_03_30.programBack(robot, node, client)
+    #     fonctions.programBack(robot, node, client)
 
 # INTHREAD.set()
 # threadToStop.join()
