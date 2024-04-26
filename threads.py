@@ -13,30 +13,27 @@ import time
 import queue
 
 class EventListThread(threading.Thread):
-    def __init__(self):
+    def __init__(self, robot):
         super(EventListThread, self).__init__()
         self.event_queue = queue.PriorityQueue()
         self.event_list = []
         self.event_list_lock = threading.Lock()  # Lock for protecting access to event list
         self.shutdown_event = threading.Event()  # Event to signal shutdown
+        self.stop = True
+        self.robot = robot
 
     def add_event(self, priority, event_data):
         self.event_queue.put((priority, event_data))
-        self.new_event_event.set()  # Signal that a new event is added
 
     def run(self):
-        while not self.shutdown_event.is_set():
-            # Wait for the event notification or timeout
-            self.new_event_event.wait(timeout=1)
-            self.new_event_event.clear()  # Clear the event flag
-
-            # Process events from the priority queue
-            while not self.event_queue.empty():
-                priority, event_data = self.event_queue.get()
-                print("Event added with priority {}: {}".format(priority, event_data))
-                # Process the event
-                # (For now, we just print it)
-                time.sleep(1)  # Simulate event processing
+        self.stop = False
+        while not self.stop:
+            # Read information from Thymio
+            self.robot.getProxHorizontal()
+            self.robot.update()
+            print(self.robot.prox)
+            #add_event
+            time.sleep(0.02) 
 
         print("Event thread shutdown.")
         # while True:
@@ -65,9 +62,9 @@ class EventListThread(threading.Thread):
         #         pass  # No event in the queue, continue waiting
         # print("Event thread shutdown.")
 
-    def shutdown(self):
-        self.shutdown_event.set()
-        self.new_event_event.set()  # Wake up the thread in case it's waiting
+    def kill(self):
+        self.stop = True
+
 
 class StateMachineThread(threading.Thread):
     def __init__(self, event_list_thread):
@@ -87,34 +84,46 @@ class StateMachineThread(threading.Thread):
 class ActionUpdaterThread(threading.Thread):
     def __init__(self):
         super(ActionUpdaterThread, self).__init__()
+        self.stop = True
 
     def run(self):
-        while True:
+        self.stop = False
+        while not self.stop:
             # Simulate updating actions
             print("Actions updated")
             time.sleep(3)
 
+    def kill(self):
+        self.stop = True
+
 if __name__ == "__main__":
-    # Create an instance of the EventListThread
-    event_list_thread = EventListThread()
+    try:
+        robot = ThymioStates()
 
-    # Create instances of StateMachineThread and ActionUpdaterThread
-    state_machine_thread = StateMachineThread(event_list_thread)
-    action_updater_thread = ActionUpdaterThread()
 
-    # Start all threads
-    event_list_thread.start()
-    state_machine_thread.start()
-    action_updater_thread.start()
-    
-    # Add events with different priorities
-    event_list_thread.add_event(2, "Low priority event")
-    event_list_thread.add_event(1, "High priority event")
-    event_list_thread.add_event(3, "Medium priority event")
+        # Create an instance of the EventListThread
+        event_list_thread = EventListThread(robot)
 
-    # Wait for a while to let the events be processed
-    time.sleep(5)
+        # Create instances of StateMachineThread and ActionUpdaterThread
+        state_machine_thread = StateMachineThread(event_list_thread)
+        action_updater_thread = ActionUpdaterThread()
 
-    # Shutdown the event thread
-    event_list_thread.shutdown()
-    event_list_thread.join()
+        # Start all threads
+        event_list_thread.start()
+        action_updater_thread.start()
+        
+        # Add events with different priorities
+        event_list_thread.add_event(2, "Low priority event")
+        event_list_thread.add_event(1, "High priority event")
+        event_list_thread.add_event(3, "Medium priority event")
+
+        # Wait for a while to let the events be processed
+        time.sleep(5)
+
+        # Shutdown the event thread
+        event_list_thread.kill()
+        action_updater_thread.kill()
+    except Exception as e:
+        print(e)
+        event_list_thread.kill()
+        action_updater_thread.kill()
