@@ -1,8 +1,5 @@
-import classes
-from classes import Thymio
-
-import states
-from states import ThymioStates
+import ThymioStates
+from ThymioStates import ThymioStates
 
 from tdmclient import ClientAsync, aw
 
@@ -29,11 +26,14 @@ class EventListThread(threading.Thread):
         self.stop = False
         while not self.stop:
             # Read information from Thymio
-            self.robot.getProxHorizontal()
             self.robot.update()
             print(self.robot.prox)
-            #add_event
-            time.sleep(0.02) 
+            # add event here
+            self.add_event(0, "1st priority --> buttons")
+            self.add_event(1, "2nd priority --> sensors")
+            self.add_event(2, "3rd priority --> accelerometer")
+            self.add_event(3, "4th priority --> microphone")
+            #
 
         print("Event thread shutdown.")
         # while True:
@@ -66,37 +66,9 @@ class EventListThread(threading.Thread):
         self.stop = True
 
 
-class StateMachineThread(threading.Thread):
-    def __init__(self, event_list_thread):
-        super(StateMachineThread, self).__init__()
-        self.event_list_thread = event_list_thread
-        self.shutdown_event = threading.Event()  # Event to signal shutdown
-
-    def run(self):
-        while True:
-            # Simulate processing events from the event list
-            with self.event_list_thread.event_list_lock:
-                if self.event_list_thread.event_list:
-                    event = self.event_list_thread.event_list.pop(0)
-                    print("Event processed:", event)
-            time.sleep(2)
-
-class ActionUpdaterThread(threading.Thread):
-    def __init__(self):
-        super(ActionUpdaterThread, self).__init__()
-        self.stop = True
-
-    def run(self):
-        self.stop = False
-        while not self.stop:
-            # Simulate updating actions
-            print("Actions updated")
-            time.sleep(3)
-
-    def kill(self):
-        self.stop = True
-
 if __name__ == "__main__":
+
+    from StateMachineThread import StateMachineThread, ActionUpdaterThread
     try:
         robot = ThymioStates()
 
