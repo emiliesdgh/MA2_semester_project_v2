@@ -22,16 +22,37 @@ class ThymioStates :
         aw(self.node.wait_for_variables())
 
     def update(self):
+
+        self.node = aw(self.client.wait_for_node())
+
+        aw(self.node.wait_for_variables({"prox.horizontal"}))
         self.button_center = self.node.v.button.center
         self.button_forward = self.node.v.button.forward
         self.button_left = self.node.v.button.left
         self.button_right = self.node.v.button.right
         self.button_backward = self.node.v.button.backward
-        self.accelero = list(self.node.v.acc)
-        self.prox = list(self.node.v.prox.horizontal)
-        #self.line = list(self.node.v.prox.ground)
+        # self.accelero = list(self.node.v.acc)
+        # self.prox = list(self.node.v.prox.horizontal)
+        self.prox = list(self.node["prox.horizontal"])
+        # self.prox_ground = list(self.node.v.prox.ground)
         self.motor_left_speed = self.node["motor.left.speed"]
         self.motor_right_speed = self.node["motor.right.speed"]
+        print("icii")
+
+        # self.button_center = node.v.button.center
+        # self.button_forward = node.v.button.forward
+        # self.button_left = node.v.button.left
+        # self.button_right = node.v.button.right
+        # self.button_backward = node.v.button.backward
+        # # self.accelero = list(self.node.v.acc)
+        # # self.prox = list(self.node.v.prox.horizontal)
+        # self.prox = list(node["prox.horizontal"])
+        # # self.prox_ground = list(self.node.v.prox.ground)
+        # self.motor_left_speed = node["motor.left.speed"]
+        # self.motor_right_speed = node["motor.right.speed"]
+        # print("icii")
+
+       
 
 
     def getButtons(self):
@@ -85,9 +106,21 @@ class ThymioStates :
 
 
 if __name__ == "__main__":
-    robot = ThymioStates()
+    
+    # client = ClientAsync()
+    # node = aw(client.wait_for_node())
+    #     # aw(self.node.unlock())
+    # aw(node.lock())
+    # aw(node.wait_for_variables())
 
+    robot = ThymioStates()
     while(True):
-        robot.getProxHorizontal()
+        # robot = ThymioStates()
+        # node = aw(client.wait_for_node())
+
+        # aw(node.wait_for_variables())
+
+        # robot.getProxHorizontal()
         robot.update()
         print(robot.prox)
+        print(robot.button_center)
