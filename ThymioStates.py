@@ -91,11 +91,11 @@ class ThymioStates :
     #         return False
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
-    robot = ThymioStates()
-    while(True):
+#     robot = ThymioStates()
+#     while(True):
 
-        robot.update()
-        print(robot.prox)
-        print(robot.button_center)
+#         robot.update()
+        # print(robot.prox)
+        # print(robot.button_center)
