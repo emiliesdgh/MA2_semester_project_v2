@@ -43,4 +43,34 @@ class ActionUpdaterThread(threading.Thread):
         self.stop = True
 
 if __name__ == "__main__":
-    ...
+    try:
+        robot = ThymioStates()
+
+
+        # Create an instance of the EventListThread
+        event_list_thread = EventListThread(robot)
+
+        # Create instances of StateMachineThread and ActionUpdaterThread
+        state_machine_thread = StateMachineThread(event_list_thread)
+        action_updater_thread = ActionUpdaterThread()
+
+        # Start all threads
+        event_list_thread.start()
+        state_machine_thread.start()
+        action_updater_thread.start()
+        
+        # # Add events with different priorities
+        # event_list_thread.add_event(2, "Low priority event")
+        # event_list_thread.add_event(1, "High priority event")
+        # event_list_thread.add_event(3, "Medium priority event")
+
+        # Wait for a while to let the events be processed
+        time.sleep(5)
+
+        # Shutdown the event thread
+        event_list_thread.kill()
+        action_updater_thread.kill()
+    except Exception as e:
+        print(e)
+        event_list_thread.kill()
+        action_updater_thread.kill()
