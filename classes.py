@@ -14,6 +14,7 @@ class Thymio :
         self.prox_horizontal = []
         self.prox_ground = []
 
+        self.allButtons = []
         self.button_center = 0
         self.button_forward = 0
         self.button_backward = 0
@@ -65,6 +66,10 @@ class Thymio :
 
         aw(node.wait_for_variables({"button.backward"}))
         self.button_backward = node.v.button.backward
+
+        self.allButtons = self.array[node.v.button.center, node.v.button.forward, node.v.button.left, node.v.button.right, node.v.button.backward]
+
+        return self.allButtons
 
     # def setButtons(self, value) : 
 

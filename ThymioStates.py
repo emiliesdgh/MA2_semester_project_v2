@@ -15,6 +15,8 @@ class ThymioStates :
         self.button_right = 0
         self.button_left = 0
 
+        self.allButtons = []
+
         self.client = ClientAsync()
         self.node = aw(self.client.wait_for_node())
         # aw(self.node.unlock())
@@ -31,7 +33,11 @@ class ThymioStates :
         self.button_right = self.node.v.button.right
         self.button_backward = self.node.v.button.backward
 
+        self.allButtons = [self.node.v.button.center, self.node.v.button.forward, self.node.v.button.left, self.node.v.button.right, self.node.v.button.backward]
+
         self.accelero = list(self.node["acc"])
+
+        self.mic = self.node.v.mic.intensity
         
         self.prox = list(self.node["prox.horizontal"])
         self.prox_ground = list(self.node["prox.ground.ambiant"])

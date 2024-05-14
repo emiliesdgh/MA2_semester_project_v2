@@ -27,12 +27,12 @@ class EventListThread(threading.Thread):
         while not self.stop:
             # Read information from Thymio
             self.robot.update()
-            print(self.robot.prox)
+            # print(self.robot.prox)
             # add event here
-            self.add_event(0, self.robot.button_center)
-            self.add_event(1, "2nd priority --> sensors")
-            self.add_event(2, "3rd priority --> accelerometer")
-            self.add_event(3, "4th priority --> microphone")
+            self.add_event(0, self.robot.allButtons)
+            self.add_event(1, self.robot.prox)
+            self.add_event(2, self.robot.accelero)
+            self.add_event(3, self.robot.mic)
           
             #
             while not self.event_queue.empty():
