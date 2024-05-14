@@ -29,7 +29,7 @@ class EventListThread(threading.Thread):
             self.robot.update()
             print(self.robot.prox)
             # add event here
-            self.add_event(0, "1st priority --> buttons")
+            self.add_event(0, self.robot.button_center)
             self.add_event(1, "2nd priority --> sensors")
             self.add_event(2, "3rd priority --> accelerometer")
             self.add_event(3, "4th priority --> microphone")
