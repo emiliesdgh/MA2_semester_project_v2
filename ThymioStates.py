@@ -27,11 +27,11 @@ class ThymioStates :
 
         self.node = aw(self.client.wait_for_node())
 
-        self.button_center = self.node.v.button.center
-        self.button_forward = self.node.v.button.forward
-        self.button_left = self.node.v.button.left
-        self.button_right = self.node.v.button.right
-        self.button_backward = self.node.v.button.backward
+        # self.button_center = self.node.v.button.center
+        # self.button_forward = self.node.v.button.forward
+        # self.button_left = self.node.v.button.left
+        # self.button_right = self.node.v.button.right
+        # self.button_backward = self.node.v.button.backward
 
         self.allButtons = [self.node.v.button.center, self.node.v.button.forward, self.node.v.button.left, self.node.v.button.right, self.node.v.button.backward]
 

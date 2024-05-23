@@ -7,6 +7,8 @@ from tdmclient import ClientAsync, aw
 
 import numpy as np
 
+import fonctions
+
 import threading
 import time
 import queue
@@ -21,12 +23,15 @@ class ButtonBackThread(threading.Thread):
     def run(self):
         self.stop = False
         while not self.stop:
-            # Simulate processing events from the event list
-            with self.event_list_thread.event_list_lock:
-                if self.event_list_thread.event_list:
-                    event = self.event_list_thread.event_list.pop()
-                    print("Event processed:", event)
-            time.sleep(2)
+
+            print("in Button Back")
+
+            # # Simulate processing events from the event list
+            # with self.event_list_thread.event_list_lock:
+            #     if self.event_list_thread.event_list:
+            #         event = self.event_list_thread.event_list.pop()
+            #         print("Event processed:", event)
+            # time.sleep(2)
 
     def kill(self):
         self.stop = True

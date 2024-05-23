@@ -3,6 +3,12 @@ from ThymioStates import ThymioStates
 
 from EventListThread import EventListThread
 
+from ButtonCenterThread import ButtonCenterThread
+from ButtonFrontThread import ButtonFrontThread
+from ButtonBackThread import ButtonBackThread
+from ButtonRightThread import ButtonRightThread
+from ButtonLeftThread import ButtonLeftThread
+
 from tdmclient import ClientAsync, aw
 
 import numpy as np
@@ -18,14 +24,65 @@ class StateMachineThread(threading.Thread):
         self.event_list_thread = event_list_thread
         self.shutdown_event = threading.Event()  # Event to signal shutdown
 
+        self.robot = robot
+
+        self.button_center_thread = ButtonCenterThread(event_list_thread)
+        self.button_front_thread = ButtonFrontThread(event_list_thread)
+        self.button_back_thread = ButtonBackThread(event_list_thread)
+        self.button_right_thread = ButtonRightThread(event_list_thread)
+        self.button_left_thread = ButtonLeftThread(event_list_thread)
+
     def run(self):
-        while True:
-            # Simulate processing events from the event list
-            with self.event_list_thread.event_list_lock:
-                if self.event_list_thread.event_list:
-                    event = self.event_list_thread.event_list.pop()
-                    print("Event processed:", event)
-            time.sleep(2)
+
+        while True :
+
+            if (self.robot.button_center):
+                self.button_center_thread.start()
+
+                self.button_front_thread.stop()
+                self.button_left_thread.stop()
+                self.button_right_thread.stop()
+                self.button_back_thread.stop()
+
+            elif (self.robot.allButtons[1]):
+                self.button_front_thread.start()
+
+                self.button_center_thread.stop()
+                self.button_left_thread.stop()
+                self.button_right_thread.stop()
+                self.button_back_thread.stop()
+            
+            elif (self.robot.allButtons[2]):
+                self.button_left_thread.start()
+
+                self.button_center_thread.stop()
+                self.button_front_thread.stop()
+                self.button_right_thread.stop()
+                self.button_back_thread.stop()
+
+            elif (self.robot.allButtons[3]):
+                self.button_right_thread.start()
+
+                self.button_center_thread.stop()
+                self.button_front_thread.stop()
+                self.button_left_thread.stop()
+                self.button_back_thread.stop()
+
+            elif (self.robot.allButtons[4]):
+                self.button_back_thread.start()
+
+                self.button_center_thread.stop()
+                self.button_front_thread.stop()
+                self.button_left_thread.stop()
+                self.button_right_thread.stop()
+
+        # while True:
+        #     # Simulate processing events from the event list
+        #     with self.event_list_thread.event_list_lock:
+        #         if self.event_list_thread.event_list:
+        #             event = self.event_list_thread.event_list.pop()
+        #             print("Event processed:", event)
+        #     time.sleep(2)
 
 class ActionUpdaterThread(threading.Thread):
     def __init__(self):
@@ -65,7 +122,7 @@ if __name__ == "__main__":
         # event_list_thread.add_event(3, "Medium priority event")
 
         # Wait for a while to let the events be processed
-        time.sleep(5)
+        time.sleep(20)
 
         # Shutdown the event thread
         event_list_thread.kill()
