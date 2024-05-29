@@ -20,24 +20,28 @@ class EventListThread(threading.Thread):
         self.robot = robot
 
     def add_event(self, priority, event_data):
+        print("dans les add event")
         self.event_queue.put((priority, event_data))
+        print("apres aavoir added event")
 
     def run(self):
         self.stop = False
         while not self.stop:
+            print("dans le while de event")
             # Read information from Thymio
             self.robot.update()
             # print(self.robot.prox)
             # add event here
+            print("avant les add event")
             self.add_event(0, self.robot.allButtons)
             self.add_event(1, self.robot.prox)
             self.add_event(2, self.robot.accelero)
             self.add_event(3, self.robot.mic)
-          
+            print("apres les add_event")
             #
             while not self.event_queue.empty():
                 priority, event_data = self.event_queue.get()
-                # print("Event added with priority {}: {}".format(priority, event_data))
+                print("Event added with priority {}: {}".format(priority, event_data))
 
         print("Event thread shutdown.")
         # while True:
@@ -72,35 +76,37 @@ class EventListThread(threading.Thread):
 
 if __name__ == "__main__":
 
-    ...
-    # from StateMachineThread import StateMachineThread, ActionUpdaterThread
-    # try:
-    #     robot = ThymioStates()
+    # ...
+    from StateMachineThread import StateMachineThread
+    try:
+        robot = ThymioStates()
 
+        print("ici apres robot")
+        # Create an instance of the EventListThread
+        event_list_thread = EventListThread(robot)
 
-    #     # Create an instance of the EventListThread
-    #     event_list_thread = EventListThread(robot)
+        print("ici apres event_list_thread")
 
-    #     # Create instances of StateMachineThread and ActionUpdaterThread
-    #     state_machine_thread = StateMachineThread(event_list_thread)
-    #     action_updater_thread = ActionUpdaterThread()
+        # Create instances of StateMachineThread and ActionUpdaterThread
+        state_machine_thread = StateMachineThread(event_list_thread, robot)
+        # action_updater_thread = ActionUpdaterThread()
+        print("ici apres state_machine_thread")
+        # Start all threads
+        event_list_thread.start()
+        # action_updater_thread.start()
+        print("apres event_list_thread_start")
+        # # Add events with different priorities
+        # event_list_thread.add_event(2, "Low priority event")
+        # event_list_thread.add_event(1, "High priority event")
+        # event_list_thread.add_event(3, "Medium priority event")
 
-    #     # Start all threads
-    #     event_list_thread.start()
-    #     action_updater_thread.start()
-        
-    #     # # Add events with different priorities
-    #     # event_list_thread.add_event(2, "Low priority event")
-    #     # event_list_thread.add_event(1, "High priority event")
-    #     # event_list_thread.add_event(3, "Medium priority event")
+        # Wait for a while to let the events be processed
+        time.sleep(5)
 
-    #     # Wait for a while to let the events be processed
-    #     time.sleep(5)
-
-    #     # Shutdown the event thread
-    #     event_list_thread.kill()
-    #     action_updater_thread.kill()
-    # except Exception as e:
-    #     print(e)
-    #     event_list_thread.kill()
-    #     action_updater_thread.kill()
+        # Shutdown the event thread
+        event_list_thread.kill()
+        # action_updater_thread.kill()
+    except Exception as e:
+        print(e)
+        event_list_thread.kill()
+        # action_updater_thread.kill()

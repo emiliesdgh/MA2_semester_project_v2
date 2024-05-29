@@ -19,70 +19,72 @@ import queue
 
 
 class StateMachineThread(threading.Thread):
-    def __init__(self, event_list_thread):
+    def __init__(self, event_list_thread, robot):
         super(StateMachineThread, self).__init__()
         self.event_list_thread = event_list_thread
         self.shutdown_event = threading.Event()  # Event to signal shutdown
 
         self.robot = robot
 
-        self.button_center_thread = ButtonCenterThread(event_list_thread)
-        self.button_front_thread = ButtonFrontThread(event_list_thread)
-        self.button_back_thread = ButtonBackThread(event_list_thread)
-        self.button_right_thread = ButtonRightThread(event_list_thread)
-        self.button_left_thread = ButtonLeftThread(event_list_thread)
+
+        # self.button_center_thread = ButtonCenterThread(event_list_thread)
+        # self.button_front_thread = ButtonFrontThread(event_list_thread)
+        # self.button_back_thread = ButtonBackThread(event_list_thread)
+        # self.button_right_thread = ButtonRightThread(event_list_thread)
+        # self.button_left_thread = ButtonLeftThread(event_list_thread)
 
     def run(self):
 
-        while True :
+        # while True :
 
-            if (self.robot.button_center):
-                self.button_center_thread.start()
+        #     if (self.robot.button_center):
+        #         self.button_center_thread.start()
 
-                self.button_front_thread.stop()
-                self.button_left_thread.stop()
-                self.button_right_thread.stop()
-                self.button_back_thread.stop()
+        #         self.button_front_thread.stop()
+        #         self.button_left_thread.stop()
+        #         self.button_right_thread.stop()
+        #         self.button_back_thread.stop()
 
-            elif (self.robot.allButtons[1]):
-                self.button_front_thread.start()
+        #     elif (self.robot.allButtons[1]):
+        #         self.button_front_thread.start()
 
-                self.button_center_thread.stop()
-                self.button_left_thread.stop()
-                self.button_right_thread.stop()
-                self.button_back_thread.stop()
-            
-            elif (self.robot.allButtons[2]):
-                self.button_left_thread.start()
+        #         self.button_center_thread.stop()
+        #         self.button_left_thread.stop()
+        #         self.button_right_thread.stop()
+        #         self.button_back_thread.stop()
 
-                self.button_center_thread.stop()
-                self.button_front_thread.stop()
-                self.button_right_thread.stop()
-                self.button_back_thread.stop()
+        #     elif (self.robot.allButtons[2]):
+        #         self.button_left_thread.start()
 
-            elif (self.robot.allButtons[3]):
-                self.button_right_thread.start()
+        #         self.button_center_thread.stop()
+        #         self.button_front_thread.stop()
+        #         self.button_right_thread.stop()
+        #         self.button_back_thread.stop()
 
-                self.button_center_thread.stop()
-                self.button_front_thread.stop()
-                self.button_left_thread.stop()
-                self.button_back_thread.stop()
+        #     elif (self.robot.allButtons[3]):
+        #         self.button_right_thread.start()
 
-            elif (self.robot.allButtons[4]):
-                self.button_back_thread.start()
+        #         self.button_center_thread.stop()
+        #         self.button_front_thread.stop()
+        #         self.button_left_thread.stop()
+        #         self.button_back_thread.stop()
 
-                self.button_center_thread.stop()
-                self.button_front_thread.stop()
-                self.button_left_thread.stop()
-                self.button_right_thread.stop()
+        #     elif (self.robot.allButtons[4]):
+        #         self.button_back_thread.start()
 
-        # while True:
-        #     # Simulate processing events from the event list
-        #     with self.event_list_thread.event_list_lock:
-        #         if self.event_list_thread.event_list:
-        #             event = self.event_list_thread.event_list.pop()
-        #             print("Event processed:", event)
-        #     time.sleep(2)
+        #         self.button_center_thread.stop()
+        #         self.button_front_thread.stop()
+        #         self.button_left_thread.stop()
+        #         self.button_right_thread.stop()
+
+        while True:
+            print("dans le state machine thread")
+            # Simulate processing events from the event list
+            with self.event_list_thread.event_list_lock:
+                if self.event_list_thread.event_list:
+                    event = self.event_list_thread.event_list.pop()
+                    print("Event processed:", event)
+            time.sleep(2)
 
 class ActionUpdaterThread(threading.Thread):
     def __init__(self):
@@ -115,7 +117,7 @@ if __name__ == "__main__":
         event_list_thread.start()
         state_machine_thread.start()
         action_updater_thread.start()
-        
+
         # # Add events with different priorities
         # event_list_thread.add_event(2, "Low priority event")
         # event_list_thread.add_event(1, "High priority event")
