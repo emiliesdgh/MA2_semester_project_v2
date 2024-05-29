@@ -37,7 +37,7 @@ class ThymioStates :
 
         # self.allButtons = [self.node.v.button.center, self.node.v.button.forward, self.node.v.button.left, self.node.v.button.right, self.node.v.button.backward]
 
-        self.allButtons = [self.button_center, self.button_forward, self.button_left, self.button_right, self.button_backward]
+        self.allButtons = [self.button_forward, self.button_left, self.button_right, self.button_backward]
 
         self.accelero = list(self.node["acc"])
 
@@ -49,9 +49,33 @@ class ThymioStates :
         self.motor_left_speed = self.node["motor.left.speed"]
         self.motor_right_speed = self.node["motor.right.speed"]
         print(" a la fin de la fonction update")
-        
+
     def __del__(self):
         aw(self.node.unlock())
+
+    def setLEDCircle(self, node, color):
+        #led = {"leds.top": colors,} 
+        
+        ledCircle = {"leds.circle" : color}
+        aw(self.node.set_variables(ledCircle))
+
+    def setLEDTop(self, node, color):
+
+        print("dans fonction set led top")
+
+        ledTop = {"leds.top" : color}
+        aw(self.node.set_variables(ledTop))
+
+    def setSpeedLeft(self,speed,node):
+        
+        print("dans fonction set speed left")
+
+        self.motor_target_left=speed
+        aw(self.node.set_variables({"motor.left.target": [speed]}))
+    
+    def setSpeedRight(self,speed,node):
+        self.motor_target_right=speed
+        aw(self.node.set_variables({"motor.right.target": [speed]}))
 
     # def getButtons(self):
     #     aw(self.node.wait_for_variables({"button.center"}))

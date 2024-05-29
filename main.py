@@ -34,12 +34,12 @@ if __name__ == "__main__":
 
         # Create an instance of the EventListThread
         event_list_thread = EventListThread(robot)
-
-        button_front_thread = ButtonFrontThread(event_list_thread)
-        button_center_thread = ButtonCenterThread(event_list_thread)
-        button_back_thread = ButtonBackThread(event_list_thread)
-        button_right_thread = ButtonRightThread(event_list_thread)
-        button_left_thread = ButtonLeftThread(event_list_thread)
+        
+        button_center_thread = ButtonCenterThread(event_list_thread, robot)
+        button_front_thread = ButtonFrontThread(event_list_thread, robot)
+        button_back_thread = ButtonBackThread(event_list_thread, robot)
+        button_right_thread = ButtonRightThread(event_list_thread, robot)
+        button_left_thread = ButtonLeftThread(event_list_thread, robot)
         # Create instances of StateMachineThread and ActionUpdaterThread
         # state_machine_thread = StateMachineThread(event_list_thread)
         # action_updater_thread = ActionUpdaterThread()
@@ -47,21 +47,17 @@ if __name__ == "__main__":
         # Start all threads
         event_list_thread.start()
         # state_machine_thread.start()
-        # action_updater_thread.start()
         
-        # # Add events with different priorities
-        # event_list_thread.add_event(2, "Low priority event")
-        # event_list_thread.add_event(1, "High priority event")
-        # event_list_thread.add_event(3, "Medium priority event")
         while True :
 
+            # print("dans le while true")
             if (robot.button_center):
-                print(robot.button_center)
+                print("in Button center")
                 button_center_thread.start()
                 # button_front_thread.stop()
                 # button_left_thread.stop()
                 # button_right_thread.stop()
-                # button_back_thread.stop()
+                button_back_thread.kill()
 
             elif (robot.button_forward):
                 print("in Button Front")
@@ -90,16 +86,18 @@ if __name__ == "__main__":
             elif (robot.button_backward):
                 print("in Button Back")
                 button_back_thread.start()
+                
                 # button_center_thread.stop()
                 # button_front_thread.stop()
                 # button_left_thread.stop()
                 # button_right_thread.stop()
 
             # Wait for a while to let the events be processed
-            time.sleep(20)
+            # time.sleep(20)
 
             # Shutdown the event thread
-            event_list_thread.kill()
+            # event_list_thread.kill()
+
         # action_updater_thread.kill()
     except Exception as e:
         print(e)

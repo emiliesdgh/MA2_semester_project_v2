@@ -113,6 +113,8 @@ def accelerometer_effect(Thymio, node, motor_speed=100) :
 
 def see_costume(Thymio, node, motor_speed=50) :
 
+    print("dans fonction see_costume")
+
     Thymio.setLEDTop(node, [32,0,0])
 
     Thymio.setSpeedLeft(motor_speed, node)
