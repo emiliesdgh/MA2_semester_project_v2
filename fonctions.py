@@ -2,7 +2,6 @@ import classes
 from classes import Thymio
 
 from tdmclient import ClientAsync, aw
-# import matplotlib.pyplot as plt
 import numpy as np
 
 
@@ -78,7 +77,7 @@ def accelerometer_effect(Thymio, node, motor_speed=100) :
 
 
     # GAUCHE
-    if accel[0]>4: #Thymio is blue when placed on one of its sides
+    if accel[0] > 4: #Thymio is blue when placed on one of its sides
         Thymio.setLEDTop(node, [0,0,32])
         # on the side
         Thymio.setSpeedLeft(0, node)
@@ -92,7 +91,7 @@ def accelerometer_effect(Thymio, node, motor_speed=100) :
         Thymio.setSpeedRight(0, node)
 
     # DERRIERE
-    if accel[1]>2: #Thymio is red when placed on its front or backside
+    if accel[1] > 2: #Thymio is red when placed on its front or backside
         Thymio.setLEDTop(node, [32,0,0])
         # on back
         Thymio.setSpeedLeft(-motor_speed, node)
@@ -105,7 +104,7 @@ def accelerometer_effect(Thymio, node, motor_speed=100) :
         Thymio.setSpeedLeft(motor_speed, node)
         Thymio.setSpeedRight(motor_speed, node)
 
-    if accel[2]>18 or accel[2]< -18: #Thymio is green when placed on its wheels or upside-down
+    if accel[2] > 18 or accel[2] < -18: #Thymio is green when placed on its wheels or upside-down
         Thymio.setLEDTop(node, [0,32,0])
         # horizontal
         Thymio.setSpeedLeft(0, node)
