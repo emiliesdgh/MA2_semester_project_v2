@@ -1,10 +1,10 @@
 from tdmclient import ClientAsync, aw
 
-import numpy as np
-
-
 import classes
 from classes import Thymio
+
+import numpy as np
+
 
 client = ClientAsync()
 node = aw(client.wait_for_node())
