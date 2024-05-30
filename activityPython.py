@@ -74,4 +74,6 @@ def accelerometer_effect(Thymio, node, motor_speed=100) :
 
 while(1) :
 
-    accelerometer_effect(Thymio, node, motor_speed=50)
+    robot = Thymio
+
+    accelerometer_effect(robot, node, motor_speed=100)
