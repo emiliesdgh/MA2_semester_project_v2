@@ -12,7 +12,21 @@ node = aw(client.wait_for_node())
 aw(node.lock())
 aw(node.wait_for_variables())
 
-def accelerometer_effect(Thymio, node, motor_speed=100) :
+robot = Thymio()
+
+def update_sensors_data(robot, node):
+
+    # get button values
+    robot.getCenterButton(node)
+
+def stop_program(robot, node, motor_speed=0) :
+
+    robot.setLEDTop(node, [0,0,0])
+
+    robot.setSpeedLeft(motor_speed, node)
+    robot.setSpeedRight(motor_speed, node)
+
+def accelerometer_effect(robot, node, motor_speed=100) :
     accel = list(node["acc"]) + [0]
 
     # print(accel[0]) 
@@ -39,41 +53,48 @@ def accelerometer_effect(Thymio, node, motor_speed=100) :
 
     # GAUCHE
     if accel[0] > 4: #Thymio is blue when placed on one of its sides
-        Thymio.setLEDTop(node, [0,0,32])
+        robot.setLEDTop(node, [0,0,32])
         # on the side
-        Thymio.setSpeedLeft(0, node)
-        Thymio.setSpeedRight(motor_speed, node)
+        robot.setSpeedLeft(0, node)
+        robot.setSpeedRight(motor_speed, node)
 
     # DROITE
     if accel[0]< -2: #Thymio is blue when placed on one of its sides
-        Thymio.setLEDTop(node, [0,0,32])
+        robot.setLEDTop(node, [0,0,32])
         # on the side
-        Thymio.setSpeedLeft(motor_speed, node)
-        Thymio.setSpeedRight(0, node)
+        robot.setSpeedLeft(motor_speed, node)
+        robot.setSpeedRight(0, node)
 
     # DERRIERE
     if accel[1] > 2: #Thymio is red when placed on its front or backside
-        Thymio.setLEDTop(node, [32,0,0])
+        robot.setLEDTop(node, [32,0,0])
         # on back
-        Thymio.setSpeedLeft(-motor_speed, node)
-        Thymio.setSpeedRight(-motor_speed, node)
+        robot.setSpeedLeft(-motor_speed, node)
+        robot.setSpeedRight(-motor_speed, node)
 
     # DEVANT
     if accel[1]< -2: #Thymio is red when placed on its front or backside
-        Thymio.setLEDTop(node, [32,0,0])
+        robot.setLEDTop(node, [32,0,0])
         # on front
-        Thymio.setSpeedLeft(motor_speed, node)
-        Thymio.setSpeedRight(motor_speed, node)
+        robot.setSpeedLeft(motor_speed, node)
+        robot.setSpeedRight(motor_speed, node)
 
     if accel[2] > 18 or accel[2] < -18: #Thymio is green when placed on its wheels or upside-down
-        Thymio.setLEDTop(node, [0,32,0])
+        robot.setLEDTop(node, [0,32,0])
         # horizontal
-        Thymio.setSpeedLeft(0, node)
-        Thymio.setSpeedRight(0, node)
+        robot.setSpeedLeft(0, node)
+        robot.setSpeedRight(0, node)
 
 
 while(1) :
 
-    robot = Thymio
+    update_sensors_data(robot, node)
 
     accelerometer_effect(robot, node, motor_speed=100)
+
+    if (robot.button_center) :
+
+        print(robot.button_center)
+        stop_program(robot, node, motor_speed=0)
+        aw(node.unlock())
+        break
