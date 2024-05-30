@@ -24,9 +24,6 @@ class ButtonCenterThread(threading.Thread):
         self.node = aw(self.client.wait_for_node())
 
         self.robot = robot
-        
-        self.node = aw(self.client.wait_for_node())
-
 
 
     def run(self):
@@ -42,6 +39,9 @@ class ButtonCenterThread(threading.Thread):
             #     if self.event_list_thread.event_list:
             #         event = self.event_list_thread.event_list.pop()
             #         print("Event processed:", event)
+            if(self.robot.button_forward) :
+                self.stop = True
+
             time.sleep(2)
 
     def kill(self):

@@ -54,43 +54,47 @@ if __name__ == "__main__":
             if (robot.button_center):
                 print("in Button center")
                 button_center_thread.start()
-                # button_front_thread.stop()
-                # button_left_thread.stop()
-                # button_right_thread.stop()
+
+                button_front_thread.kill()
+                button_left_thread.kill()
+                button_right_thread.kill()
                 button_back_thread.kill()
 
             elif (robot.button_forward):
                 print("in Button Front")
                 button_front_thread.start()
-                # button_center_thread.stop()
-                # button_left_thread.stop()
-                # button_right_thread.stop()
-                # button_back_thread.stop()
+
+                button_center_thread.kill()
+                button_left_thread.kill()
+                button_right_thread.kill()
+                button_back_thread.kill()
             
             elif (robot.button_left):
                 print("in Button Left")
                 button_left_thread.start()
-                # button_center_thread.stop()
-                # button_front_thread.stop()
-                # button_right_thread.stop()
-                # button_back_thread.stop()
+
+                button_center_thread.kill()
+                button_front_thread.kill()
+                button_right_thread.kill()
+                button_back_thread.kill()
 
             elif (robot.button_right):
                 print("in Button Right")
                 button_right_thread.start()
-                # button_center_thread.stop()
-                # button_front_thread.stop()
-                # button_left_thread.stop()
-                # button_back_thread.stop()
+
+                button_center_thread.kill()
+                button_front_thread.kill()
+                button_left_thread.kill()
+                button_back_thread.kill()
 
             elif (robot.button_backward):
                 print("in Button Back")
                 button_back_thread.start()
                 
-                # button_center_thread.stop()
-                # button_front_thread.stop()
-                # button_left_thread.stop()
-                # button_right_thread.stop()
+                button_center_thread.kill()
+                button_front_thread.kill()
+                button_left_thread.kill()
+                button_right_thread.kill()
 
             # Wait for a while to let the events be processed
             # time.sleep(20)

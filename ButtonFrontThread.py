@@ -20,6 +20,9 @@ class ButtonFrontThread(threading.Thread):
         self.event_list_thread = event_list_thread
         self.shutdown_event = threading.Event()  # Event to signal shutdown
 
+        self.client = ClientAsync()
+        self.node = aw(self.client.wait_for_node())
+
         self.robot = robot
 
     def run(self):
@@ -27,6 +30,8 @@ class ButtonFrontThread(threading.Thread):
         while not self.stop:
 
             print("in Button Front")
+
+            fonctions.no_costume(self.robot, self.node, motor_speed=0)
 
             # # Simulate processing events from the event list
             # with self.event_list_thread.event_list_lock:
