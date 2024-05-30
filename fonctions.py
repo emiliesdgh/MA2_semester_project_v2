@@ -114,7 +114,7 @@ def see_costume(Thymio, node, motor_speed=50) :
 
     print("dans fonction see_costume")
 
-    Thymio.setLEDTop(node, [32,0,0])
+    Thymio.setLEDTop(node, [0,32,0])
 
     # Thymio.setSpeedLeft(motor_speed, node)
     # Thymio.setSpeedRight(motor_speed, node)

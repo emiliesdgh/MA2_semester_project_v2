@@ -66,14 +66,14 @@ class ThymioStates :
         ledTop = {"leds.top" : color}
         aw(self.node.set_variables(ledTop))
 
-    def setSpeedLeft(self,speed,node):
+    def setSpeedLeft(self,speed):#,node):
         
         print("dans fonction set speed left")
 
         self.motor_target_left=speed
         aw(self.node.set_variables({"motor.left.target": [speed]}))
     
-    def setSpeedRight(self,speed,node):
+    def setSpeedRight(self,speed):#,node):
         self.motor_target_right=speed
         aw(self.node.set_variables({"motor.right.target": [speed]}))
 

@@ -3,11 +3,11 @@ from ThymioStates import ThymioStates
 
 from EventListThread import EventListThread
 
-from ButtonCenterThread import ButtonCenterThread
-from ButtonFrontThread import ButtonFrontThread
-from ButtonBackThread import ButtonBackThread
-from ButtonRightThread import ButtonRightThread
-from ButtonLeftThread import ButtonLeftThread
+from buttonCenterThread import ButtonCenterThread
+from buttonFrontThread import ButtonFrontThread
+from buttonBackThread import ButtonBackThread
+from buttonRightThread import ButtonRightThread
+from buttonLeftThread import ButtonLeftThread
 
 from tdmclient import ClientAsync, aw
 
@@ -26,6 +26,7 @@ node = aw(client.wait_for_node())
 # # aw(node.unlock())
 # aw(node.lock())
 aw(node.wait_for_variables())
+
 
 if __name__ == "__main__":
     try:
@@ -47,54 +48,82 @@ if __name__ == "__main__":
         # Start all threads
         event_list_thread.start()
         # state_machine_thread.start()
+
+        button_list = [(robot.button_center, ButtonCenterThread),(robot.button_forward, ButtonFrontThread),(robot.button_backward, ButtonBackThread),(robot.button_left, ButtonLeftThread),(robot.button_right, ButtonRightThread)]
         
+        button = None
+
         while True :
 
-            # print("dans le while true")
-            if (robot.button_center):
-                print("in Button center")
-                button_center_thread.start()
+            if (robot.button_center or robot.allButtons):
 
-                button_front_thread.kill()
-                button_left_thread.kill()
-                button_right_thread.kill()
-                button_back_thread.kill()
+                print("dans le premier if")
 
-            elif (robot.button_forward):
-                print("in Button Front")
-                button_front_thread.start()
+                if button is not None :
 
-                button_center_thread.kill()
-                button_left_thread.kill()
-                button_right_thread.kill()
-                button_back_thread.kill()
-            
-            elif (robot.button_left):
-                print("in Button Left")
-                button_left_thread.start()
+                    butt.kill()
+                    butt.robot = None
+                    robot.setSpeedLeft(0)
+                    robot.setSpeedRight(0)
+                    
+            for robot.button_center, butt in button_list:
 
-                button_center_thread.kill()
-                button_front_thread.kill()
-                button_right_thread.kill()
-                button_back_thread.kill()
-
-            elif (robot.button_right):
-                print("in Button Right")
-                button_right_thread.start()
-
-                button_center_thread.kill()
-                button_front_thread.kill()
-                button_left_thread.kill()
-                button_back_thread.kill()
-
-            elif (robot.button_backward):
-                print("in Button Back")
-                button_back_thread.start()
+                print("dans le for")
                 
-                button_center_thread.kill()
-                button_front_thread.kill()
-                button_left_thread.kill()
-                button_right_thread.kill()
+                if robot.button_center:
+
+                    print("dans le 2e if")
+                    button = butt(robot)
+                    print("avant le button start")
+                    button.start()
+                    print("apres le button start")
+
+
+            # # print("dans le while true")
+            # if (robot.button_center):
+            #     print("in Button center")
+            #     button_center_thread.start()
+
+            #     button_front_thread.kill()
+            #     button_left_thread.kill()
+            #     button_right_thread.kill()
+            #     button_back_thread.kill()
+
+            # elif (robot.button_forward):
+            #     print("in Button Front")
+            #     button_front_thread.start()
+
+            #     button_center_thread.kill()
+            #     button_left_thread.kill()
+            #     button_right_thread.kill()
+            #     button_back_thread.kill()
+            
+            # elif (robot.button_left):
+            #     print("in Button Left")
+            #     button_left_thread.start()
+
+            #     button_center_thread.kill()
+            #     button_front_thread.kill()
+            #     button_right_thread.kill()
+            #     button_back_thread.kill()
+
+            # elif (robot.button_right):
+            #     print("in Button Right")
+            #     button_right_thread.start()
+
+            #     button_center_thread.kill()
+            #     button_front_thread.kill()
+            #     button_left_thread.kill()
+            #     button_back_thread.kill()
+
+            # elif (robot.button_backward):
+            #     print("in Button Back")
+            #     button_back_thread.start()
+                
+            #     button_center_thread.kill()
+            #     button_front_thread.kill()
+            #     button_left_thread.kill()
+            #     button_right_thread.kill()
 
             # Wait for a while to let the events be processed
             # time.sleep(20)

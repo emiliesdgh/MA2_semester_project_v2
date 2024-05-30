@@ -40,6 +40,7 @@ class ButtonCenterThread(threading.Thread):
             #         event = self.event_list_thread.event_list.pop()
             #         print("Event processed:", event)
             if(self.robot.button_forward) :
+                print("in Button Centre thread, pressed on button forward")
                 self.stop = True
 
             time.sleep(2)
