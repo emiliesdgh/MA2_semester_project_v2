@@ -35,18 +35,7 @@ class ButtonCenterThread(threading.Thread):
             color = [24,24,24,24,24,24,24,24]
             self.robot.setLEDCircle(color) 
 
-            # self.robot.setLEDTop([32,0,0])
-
-            # fonctions.stop_program(self.robot, self.event_list_thread.node, motor_speed=0)
             fonctions.stop_program(self.robot, motor_speed=0)
-            # # Simulate processing events from the event list
-            # with self.event_list_thread.event_list_lock:
-            #     if self.event_list_thread.event_list:
-            #         event = self.event_list_thread.event_list.pop()
-            #         print("Event processed:", event)
-            # if(self.robot.button_forward) :
-            #     print("in Button Centre thread, pressed on button forward")
-            #     self.stop = True
 
             time.sleep(2)
 

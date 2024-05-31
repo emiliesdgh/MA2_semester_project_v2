@@ -36,14 +36,7 @@ class ButtonFrontThread(threading.Thread):
 
             self.robot.setLEDTop([0,32,0])
 
-            fonctions.no_costume(self.robot, self.node, motor_speed=0)
-
-            # # Simulate processing events from the event list
-            # with self.event_list_thread.event_list_lock:
-            #     if self.event_list_thread.event_list:
-            #         event = self.event_list_thread.event_list.pop()
-            #         print("Event processed:", event)
-            # time.sleep(2)
+            fonctions.no_costume(self.robot, motor_speed=0)
 
     def kill(self):
         self.stop = True
