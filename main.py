@@ -63,89 +63,76 @@ if __name__ == "__main__":
                 if (program is not None) and (robot.button_center) :
 
                     program.kill()
-                    # program = None
+                    program = None
                     robot.setSpeedLeft(0)
                     robot.setSpeedRight(0)
                     robot.setLEDTop([32,32,32])
 
-                # if robot.button_center:
+                if (program is None) and (robot.button_center):
 
-                #     color = [24,24,24,24,24,24,24,24]
-                #     robot.setLEDCircle(color)   
+                    print("dans le 2e if")
+                    program = ButtonCenterThread(event_list_thread, robot)
+                    print("avant le program start")
+                    program.start()
+                    print("apres le program start")
 
-                #     print("dans le 2e if")
-                #     program = ButtonCenterThread(event_list_thread, robot)
-                #     print("avant le program start")
-                #     program.start()
-                #     print("apres le program start")
+                elif (program is None) and (robot.button_forward):
 
-                # elif robot.button_forward:
+                    print("dans le 2e if")
+                    program = ButtonFrontThread(event_list_thread, robot)
+                    print("avant le program start")
+                    program.start()
+                    print("apres le program start")
 
-                #     color = [24,0,0,0,0,0,0,0]
-                #     robot.setLEDCircle(color) 
+                elif (program is None) and (robot.button_backward):
 
-                #     print("dans le 2e if")
-                #     program = ButtonCenterThread(event_list_thread, robot)
-                #     print("avant le program start")
-                #     program.start()
-                #     print("apres le program start")
+                    print("dans le 2e if")
+                    program = ButtonBackThread(event_list_thread, robot)
+                    print("avant le program start")
+                    program.start()
+                    print("apres le program start")
 
-                # elif robot.button_backward:
+                elif (program is None) and (robot.button_left):
 
-                #     color = [0,0,0,0,24,0,0,0]
-                #     robot.setLEDCircle(color) 
+                    print("dans le 2e if")
+                    program = ButtonLeftThread(event_list_thread, robot)
+                    print("avant le program start")
+                    program.start()
+                    print("apres le program start")
 
-                #     print("dans le 2e if")
-                #     program = ButtonCenterThread(event_list_thread, robot)
-                #     print("avant le program start")
-                #     program.start()
-                #     print("apres le program start")
+                elif (program is None) and (robot.button_right):
 
-                # elif robot.button_left:
-
-                #     color = [0,0,0,0,0,0,24,0]
-                #     robot.setLEDCircle(color) 
-
-                #     print("dans le 2e if")
-                #     program = ButtonCenterThread(event_list_thread, robot)
-                #     print("avant le program start")
-                #     program.start()
-                #     print("apres le program start")
-
-                # elif robot.button_right:
-
-                #     color = [0,0,24,0,0,0,0,0]
-                #     robot.setLEDCircle(color) 
-
-                #     print("dans le 2e if")
-                #     program = ButtonCenterThread(event_list_thread, robot)
-                #     print("avant le program start")
-                #     program.start()
-                #     print("apres le program start")
+                    print("dans le 2e if")
+                    program = ButtonRightThread(event_list_thread, robot)
+                    print("avant le program start")
+                    program.start()
+                    print("apres le program start")
                     
-            for button_pressed, button_program in program_list:
+            # for button_pressed, button_program in program_list:
 
-                print("dans le for")
+            #     print("dans le for")
                 
-                if button_pressed:
+            #     if button_pressed:
 
-                    robot.setLEDTop([0,32,0])
+            #         robot.setLEDTop([0,32,0])
 
-                    if button_pressed == robot.button_center :
+            #         if button_pressed == robot.button_center :
 
-                        print("dans le 2e if")
-                        program = button_program(event_list_thread, robot)
-                        print("avant le program start")
-                        program.start()
-                        print("apres le program start")
+            #             robot.setLEDTop([0,32,32])
+
+            #             print("dans le 2e if")
+            #             program = button_program(event_list_thread, robot)
+            #             print("avant le program start")
+            #             program.start()
+            #             print("apres le program start")
                     
-                    elif button_pressed == robot.button_forward :
+            #         elif button_pressed == robot.button_forward :
 
-                        print("dans le 2e if")
-                        program = button_program(event_list_thread, robot)
-                        print("avant le program start")
-                        program.start()
-                        print("apres le program start")
+            #             print("dans le 2e if")
+            #             program = button_program(event_list_thread, robot)
+            #             print("avant le program start")
+            #             program.start()
+            #             print("apres le program start")
             
             # time.sleep(5)
 

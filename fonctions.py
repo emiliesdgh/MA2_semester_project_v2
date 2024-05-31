@@ -14,12 +14,12 @@ def setButtons(Thymio, value) :
         Thymio.buttonLeft = value
 
 
-def stop_program(Thymio, node, motor_speed=0) :
+def stop_program(Thymio, motor_speed=0) :
 
-    Thymio.setLEDTop(node, [32,32,32])
+    Thymio.setLEDTop([32,32,32])
 
-    Thymio.setSpeedLeft(motor_speed, node)
-    Thymio.setSpeedRight(motor_speed, node)
+    Thymio.setSpeedLeft(motor_speed)
+    Thymio.setSpeedRight(motor_speed)
 
 def microphone(Thymio, node, client, motor_speed=50) :
     mic = node.v.mic.intensity
