@@ -15,15 +15,16 @@ def stop_program(Thymio) :
     Thymio.setSpeedLeft(0)
     Thymio.setSpeedRight(0)
 
+
 def see_costume(Thymio, motor_speed=0) :
 
     Thymio.setSpeedLeft(motor_speed)
     Thymio.setSpeedRight(motor_speed)
 
+
 def auto_ext_interaction(Thymio, i, motor_speed=100) :
 
-    print(Thymio.auto)
-    # i = i + 1
+    # print(Thymio.auto)
     if(i == 2) and (Thymio.auto) :
         Thymio.auto = False
 
@@ -39,11 +40,7 @@ def auto_ext_interaction(Thymio, i, motor_speed=100) :
         Thymio.setSpeedRight(-motor_speed)
 
 
-
-
 def ext_interaction(Thymio, motor_speed=100) :
-
-    # prox = list(node["prox.horizontal"]) + [0]
 
     if(Thymio.prox[5] > 2000) and (Thymio.prox[5] > 2000) :
 
@@ -84,7 +81,6 @@ def ext_interaction(Thymio, motor_speed=100) :
 
 
 def accelerometer_effect(Thymio, motor_speed=100) :
-    # accel = list(node["acc"]) + [0]
 
     # print(accel[0]) 
     # max droite  : -18 - -20
@@ -142,6 +138,7 @@ def accelerometer_effect(Thymio, motor_speed=100) :
         Thymio.setSpeedLeft(0)
         Thymio.setSpeedRight(0)
 
+
 def autoTurn(Thymio, motor_speed=50) :
 
     if (Thymio.prox > [0,0,0,0,0,0,2000]) :
@@ -173,7 +170,6 @@ def autoTurn(Thymio, motor_speed=50) :
 
 
 def microphone(Thymio, client, motor_speed=50) :
-    # mic = node.v.mic.intensity
 
     print(Thymio.mic)
     if Thymio.microphone_set and Thymio.mic>20 :
@@ -205,7 +201,6 @@ def no_costume(Thymio, motor_speed=0) :
     Thymio.setSpeedRight(motor_speed)
 
 
-
 def programFront (Thymio, client) :
 
     Thymio.setLEDTop([20,0,32])
@@ -224,9 +219,6 @@ def programFront (Thymio, client) :
     
 
 def programBack (Thymio) :
-
-    # prox = list(node["prox.horizontal"]) + [0]
-    # proxG = list(node["prox.ground.ambiant"]) + [0]
 
     if (Thymio.prox[5]>1000 and Thymio.prox[6]>1000 and Thymio.prox_ground[0]>10) :
 
