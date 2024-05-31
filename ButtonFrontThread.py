@@ -10,6 +10,7 @@ import numpy as np
 import fonctions
 
 import threading
+import random
 import time
 import queue
 
@@ -25,8 +26,13 @@ class ButtonFrontThread(threading.Thread):
 
         self.robot = robot
 
+        self.random_integer = 0
+
     def run(self):
         self.stop = False
+
+        self.random_integer = random.randint(1,5)
+
         while not self.stop:
 
             print("in Button Front")
@@ -37,6 +43,28 @@ class ButtonFrontThread(threading.Thread):
             self.robot.setLEDTop([32,0,32])
 
             fonctions.no_costume(self.robot, motor_speed=0)
+
+            print(self.random_integer)
+
+            if(self.random_integer == 1) :
+                color = [24,24,0,0,0,0,0,0]
+                self.robot.setLEDCircle(color) 
+            
+            elif(self.random_integer == 2) :
+                color = [24,0,24,0,0,0,0,0]
+                self.robot.setLEDCircle(color) 
+
+            elif(self.random_integer == 3) :
+                color = [24,0,0,24,0,0,0,0]
+                self.robot.setLEDCircle(color) 
+
+            elif(self.random_integer == 4) :
+                color = [24,0,0,0,24,0,0,0]
+                self.robot.setLEDCircle(color) 
+
+            elif(self.random_integer == 5) :
+                color = [24,0,0,0,0,24,0,0]
+                self.robot.setLEDCircle(color) 
 
     def kill(self):
         self.stop = True
