@@ -29,7 +29,7 @@ class ButtonLeftThread(threading.Thread):
             color = [0,0,0,0,0,0,24,0]
             self.robot.setLEDCircle(color) 
             
-            self.robot.setLEDTop([32,32,32])
+            self.robot.setLEDTop([0,0,32])
 
             print("in Button Left")
 

@@ -1,5 +1,5 @@
-import classes
-from classes import Thymio
+# import classes
+# from classes import Thymio
 
 from tdmclient import ClientAsync, aw
 # import matplotlib.pyplot as plt
@@ -39,7 +39,7 @@ class ThymioStates :
 
         # self.allButtons = [self.button_forward, self.button_left, self.button_right, self.button_backward]
 
-        self.accelero = list(self.node["acc"])
+        self.accel = list(self.node["acc"])
 
         self.mic = self.node.v.mic.intensity
         

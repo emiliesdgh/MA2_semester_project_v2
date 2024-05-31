@@ -35,7 +35,7 @@ class ButtonCenterThread(threading.Thread):
             color = [24,24,24,24,24,24,24,24]
             self.robot.setLEDCircle(color) 
 
-            fonctions.stop_program(self.robot, motor_speed=0)
+            fonctions.stop_program(self.robot)
 
             time.sleep(2)
 

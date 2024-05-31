@@ -52,7 +52,7 @@ if __name__ == "__main__":
                     program = None
                     robot.setSpeedLeft(0)
                     robot.setSpeedRight(0)
-                    robot.setLEDTop([32,32,32])
+                    robot.setLEDTop([0,0,0])
 
                 if (program is None) and (robot.button_center):
 
@@ -66,19 +66,19 @@ if __name__ == "__main__":
 
                 elif (program is None) and (robot.button_backward):
 
-                    program = ButtonBackThread(event_list_thread, robot)
+                    program = ButtonBackThread(event_list_thread, robot, node)
+                    program.start()
+
+                elif (program is None) and (robot.button_right):
+
+                    program = ButtonRightThread(event_list_thread, robot, node)
                     program.start()
 
                 elif (program is None) and (robot.button_left):
 
                     program = ButtonLeftThread(event_list_thread, robot)
                     program.start()
-
-                elif (program is None) and (robot.button_right):
-
-                    program = ButtonRightThread(event_list_thread, robot)
-                    program.start()
-                    
+           
     except Exception as e:
         print(e)
         event_list_thread.kill()

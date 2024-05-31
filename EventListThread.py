@@ -37,7 +37,7 @@ class EventListThread(threading.Thread):
             self.add_event(0, self.robot.button_center)
             self.add_event(1, self.robot.allButtons)
             self.add_event(2, self.robot.prox)
-            self.add_event(3, self.robot.accelero)
+            self.add_event(3, self.robot.accel)
             self.add_event(4, self.robot.mic)
             # print("apres les add_event")
             #
