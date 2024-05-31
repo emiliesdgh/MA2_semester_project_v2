@@ -1,6 +1,3 @@
-# import classes
-# from classes import thymio
-
 import ThymioStates
 from ThymioStates import ThymioStates
 
@@ -24,7 +21,6 @@ def see_costume(Thymio, motor_speed=0) :
 
 def auto_ext_interaction(Thymio, i, motor_speed=100) :
 
-    # print(Thymio.auto)
     if(i == 2) and (Thymio.auto) :
         Thymio.auto = False
 

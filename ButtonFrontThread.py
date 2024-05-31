@@ -11,8 +11,8 @@ import fonctions
 
 import threading
 import random
-import time
-import queue
+# import time
+# import queue
 
 
 class ButtonFrontThread(threading.Thread):

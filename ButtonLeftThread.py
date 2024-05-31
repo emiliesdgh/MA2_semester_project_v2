@@ -21,10 +21,6 @@ class ButtonLeftThread(threading.Thread):
 
         self.robot = robot
 
-        # self.variable = variable
-
-
-
     def run(self):
         self.stop = False
         while not self.stop:

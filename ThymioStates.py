@@ -1,8 +1,5 @@
-# import classes
-# from classes import Thymio
-
 from tdmclient import ClientAsync, aw
-# import matplotlib.pyplot as plt
+
 import numpy as np
 
 class ThymioStates :

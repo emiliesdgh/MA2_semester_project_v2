@@ -6,7 +6,6 @@ from tdmclient import ClientAsync, aw
 import numpy as np
 
 import threading
-import time
 import queue
 
 class EventListThread(threading.Thread):
