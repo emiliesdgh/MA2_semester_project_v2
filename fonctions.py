@@ -110,24 +110,24 @@ def accelerometer_effect(Thymio, node, motor_speed=100) :
         Thymio.setSpeedLeft(0, node)
         Thymio.setSpeedRight(0, node)
 
-def see_costume(Thymio, node, motor_speed=50) :
+def see_costume(Thymio, motor_speed=0) :
 
     print("dans fonction see_costume")
 
-    Thymio.setLEDTop(node, [0,32,0])
+    # Thymio.setLEDTop([0,32,0])
 
-    # Thymio.setSpeedLeft(motor_speed, node)
-    # Thymio.setSpeedRight(motor_speed, node)
+    Thymio.setSpeedLeft(motor_speed)
+    Thymio.setSpeedRight(motor_speed)
 
-def no_costume(Thymio, node, motor_speed=0) :
+def no_costume(Thymio, motor_speed=0) :
 
-    Thymio.setLEDTop(node, [0,32,0])
+    Thymio.setLEDTop([0,32,0])
 
-    Thymio.setSpeedLeft(motor_speed, node)
-    Thymio.setSpeedRight(motor_speed, node)
+    Thymio.setSpeedLeft(motor_speed)
+    Thymio.setSpeedRight(motor_speed)
 
 
-def ext_interaction(Thymio, node, motor_speed=100, obs_threshold=500) :
+def ext_interaction(Thymio, node, motor_speed=100) :
 
     prox = list(node["prox.horizontal"]) + [0]
 

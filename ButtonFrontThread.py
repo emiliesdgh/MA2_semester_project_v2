@@ -31,6 +31,11 @@ class ButtonFrontThread(threading.Thread):
 
             print("in Button Front")
 
+            color = [24,0,0,0,0,0,0,0]
+            self.robot.setLEDCircle(color) 
+
+            self.robot.setLEDTop([0,32,0])
+
             fonctions.no_costume(self.robot, self.node, motor_speed=0)
 
             # # Simulate processing events from the event list

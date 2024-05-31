@@ -36,11 +36,11 @@ if __name__ == "__main__":
         # Create an instance of the EventListThread
         event_list_thread = EventListThread(robot)
         
-        button_center_thread = ButtonCenterThread(event_list_thread, robot)
-        button_front_thread = ButtonFrontThread(event_list_thread, robot)
-        button_back_thread = ButtonBackThread(event_list_thread, robot)
-        button_right_thread = ButtonRightThread(event_list_thread, robot)
-        button_left_thread = ButtonLeftThread(event_list_thread, robot)
+        # button_center_thread = ButtonCenterThread(event_list_thread, robot)
+        # button_front_thread = ButtonFrontThread(event_list_thread, robot)
+        # button_back_thread = ButtonBackThread(event_list_thread, robot)
+        # button_right_thread = ButtonRightThread(event_list_thread, robot)
+        # button_left_thread = ButtonLeftThread(event_list_thread, robot)
         # Create instances of StateMachineThread and ActionUpdaterThread
         # state_machine_thread = StateMachineThread(event_list_thread)
         # action_updater_thread = ActionUpdaterThread()
@@ -49,34 +49,105 @@ if __name__ == "__main__":
         event_list_thread.start()
         # state_machine_thread.start()
 
-        button_list = [(robot.button_center, ButtonCenterThread),(robot.button_forward, ButtonFrontThread),(robot.button_backward, ButtonBackThread),(robot.button_left, ButtonLeftThread),(robot.button_right, ButtonRightThread)]
+        program_list = [(robot.button_center, ButtonCenterThread),(robot.button_forward, ButtonFrontThread),(robot.button_backward, ButtonBackThread),(robot.button_left, ButtonLeftThread),(robot.button_right, ButtonRightThread)]
+        # program_list = [(robot.button_center, button_center_thread),(robot.button_forward, button_front_thread),(robot.button_backward, button_back_thread),(robot.button_left, button_left_thread),(robot.button_right, button_right_thread)]
         
-        button = None
+        program = None
 
         while True :
 
-            if (robot.button_center or robot.allButtons):
+            if (robot.allButtons):
 
                 print("dans le premier if")
 
-                if button is not None :
+                if (program is not None) and (robot.button_center) :
 
-                    butt.kill()
-                    butt.robot = None
+                    program.kill()
+                    # program = None
                     robot.setSpeedLeft(0)
                     robot.setSpeedRight(0)
+                    robot.setLEDTop([32,32,32])
+
+                # if robot.button_center:
+
+                #     color = [24,24,24,24,24,24,24,24]
+                #     robot.setLEDCircle(color)   
+
+                #     print("dans le 2e if")
+                #     program = ButtonCenterThread(event_list_thread, robot)
+                #     print("avant le program start")
+                #     program.start()
+                #     print("apres le program start")
+
+                # elif robot.button_forward:
+
+                #     color = [24,0,0,0,0,0,0,0]
+                #     robot.setLEDCircle(color) 
+
+                #     print("dans le 2e if")
+                #     program = ButtonCenterThread(event_list_thread, robot)
+                #     print("avant le program start")
+                #     program.start()
+                #     print("apres le program start")
+
+                # elif robot.button_backward:
+
+                #     color = [0,0,0,0,24,0,0,0]
+                #     robot.setLEDCircle(color) 
+
+                #     print("dans le 2e if")
+                #     program = ButtonCenterThread(event_list_thread, robot)
+                #     print("avant le program start")
+                #     program.start()
+                #     print("apres le program start")
+
+                # elif robot.button_left:
+
+                #     color = [0,0,0,0,0,0,24,0]
+                #     robot.setLEDCircle(color) 
+
+                #     print("dans le 2e if")
+                #     program = ButtonCenterThread(event_list_thread, robot)
+                #     print("avant le program start")
+                #     program.start()
+                #     print("apres le program start")
+
+                # elif robot.button_right:
+
+                #     color = [0,0,24,0,0,0,0,0]
+                #     robot.setLEDCircle(color) 
+
+                #     print("dans le 2e if")
+                #     program = ButtonCenterThread(event_list_thread, robot)
+                #     print("avant le program start")
+                #     program.start()
+                #     print("apres le program start")
                     
-            for robot.button_center, butt in button_list:
+            for button_pressed, button_program in program_list:
 
                 print("dans le for")
                 
-                if robot.button_center:
+                if button_pressed:
 
-                    print("dans le 2e if")
-                    button = butt(robot)
-                    print("avant le button start")
-                    button.start()
-                    print("apres le button start")
+                    robot.setLEDTop([0,32,0])
+
+                    if button_pressed == robot.button_center :
+
+                        print("dans le 2e if")
+                        program = button_program(event_list_thread, robot)
+                        print("avant le program start")
+                        program.start()
+                        print("apres le program start")
+                    
+                    elif button_pressed == robot.button_forward :
+
+                        print("dans le 2e if")
+                        program = button_program(event_list_thread, robot)
+                        print("avant le program start")
+                        program.start()
+                        print("apres le program start")
+            
+            # time.sleep(5)
 
 
             # # print("dans le while true")

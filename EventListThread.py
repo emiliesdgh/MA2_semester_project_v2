@@ -43,7 +43,7 @@ class EventListThread(threading.Thread):
             #
             while not self.event_queue.empty():
                 priority, event_data = self.event_queue.get()
-                print("Event added with priority {}: {}".format(priority, event_data))
+                # print("Event added with priority {}: {}".format(priority, event_data))
 
         print("Event thread shutdown.")
         # while True:
@@ -76,9 +76,9 @@ class EventListThread(threading.Thread):
         self.stop = True
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
-    ...
+#     ...
     # from StateMachineThread import StateMachineThread
     # try:
     #     robot = ThymioStates()

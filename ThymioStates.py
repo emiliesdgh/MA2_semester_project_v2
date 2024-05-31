@@ -25,7 +25,7 @@ class ThymioStates :
 
     def update(self):
 
-        print("dans la fonction update de thymio states")
+        # print("dans la fonction update de thymio states")
 
         self.node = aw(self.client.wait_for_node())
 
@@ -35,9 +35,9 @@ class ThymioStates :
         self.button_right = self.node.v.button.right
         self.button_backward = self.node.v.button.backward
 
-        # self.allButtons = [self.node.v.button.center, self.node.v.button.forward, self.node.v.button.left, self.node.v.button.right, self.node.v.button.backward]
+        self.allButtons = [self.node.v.button.center, self.node.v.button.forward, self.node.v.button.left, self.node.v.button.right, self.node.v.button.backward]
 
-        self.allButtons = [self.button_forward, self.button_left, self.button_right, self.button_backward]
+        # self.allButtons = [self.button_forward, self.button_left, self.button_right, self.button_backward]
 
         self.accelero = list(self.node["acc"])
 
@@ -48,27 +48,27 @@ class ThymioStates :
         
         self.motor_left_speed = self.node["motor.left.speed"]
         self.motor_right_speed = self.node["motor.right.speed"]
-        print(" a la fin de la fonction update")
+        # print(" a la fin de la fonction update")
 
     def __del__(self):
         aw(self.node.unlock())
 
-    def setLEDCircle(self, node, color):
+    def setLEDCircle(self, color):
         #led = {"leds.top": colors,} 
         
         ledCircle = {"leds.circle" : color}
         aw(self.node.set_variables(ledCircle))
 
-    def setLEDTop(self, node, color):
+    def setLEDTop(self, color):
 
-        print("dans fonction set led top")
+        # print("dans fonction set led top")
 
         ledTop = {"leds.top" : color}
         aw(self.node.set_variables(ledTop))
 
     def setSpeedLeft(self,speed):#,node):
         
-        print("dans fonction set speed left")
+        # print("dans fonction set speed left")
 
         self.motor_target_left=speed
         aw(self.node.set_variables({"motor.left.target": [speed]}))

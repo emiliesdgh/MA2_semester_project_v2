@@ -26,6 +26,11 @@ class ButtonRightThread(threading.Thread):
         self.stop = False
         while not self.stop:
 
+            color = [0,0,24,0,0,0,0,0]
+            self.robot.setLEDCircle(color) 
+
+            self.robot.setLEDTop([32,32,0])
+
             print("in Button Right")
 
             # # Simulate processing events from the event list

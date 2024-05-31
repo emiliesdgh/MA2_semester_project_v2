@@ -26,6 +26,11 @@ class ButtonLeftThread(threading.Thread):
         self.stop = False
         while not self.stop:
 
+            color = [0,0,0,0,0,0,24,0]
+            self.robot.setLEDCircle(color) 
+            
+            self.robot.setLEDTop([32,32,32])
+
             print("in Button Left")
 
             # # Simulate processing events from the event list
