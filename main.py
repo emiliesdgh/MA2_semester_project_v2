@@ -25,6 +25,8 @@ node = aw(client.wait_for_node())
 # aw(node.lock())
 aw(node.wait_for_variables())
 
+# variable = True
+
 
 if __name__ == "__main__":
     try:
@@ -48,8 +50,7 @@ if __name__ == "__main__":
 
                     program.kill()
                     program = None
-                    robot.setSpeedLeft(0)
-                    robot.setSpeedRight(0)
+                    fonctions.stop_program(robot)
                     robot.setLEDTop([0,0,0])
                     robot.setLEDCircle([0,0,0,0,0,0,0,0])
 
@@ -75,7 +76,7 @@ if __name__ == "__main__":
 
                 elif (program is None) and (robot.button_left):
 
-                    program = ButtonLeftThread(event_list_thread, robot)
+                    program = ButtonLeftThread(event_list_thread, robot)#, robot.variable)
                     program.start()
            
     except Exception as e:

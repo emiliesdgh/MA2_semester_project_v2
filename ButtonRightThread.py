@@ -32,7 +32,7 @@ class ButtonRightThread(threading.Thread):
 
             self.robot.setLEDTop([0,32,0])
 
-            fonctions.accelerometer_effect(self.robot, self.node, motor_speed=100)
+            fonctions.accelerometer_effect(self.robot, motor_speed=100)
 
             print("in Button Right")
 

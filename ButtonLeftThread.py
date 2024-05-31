@@ -21,6 +21,10 @@ class ButtonLeftThread(threading.Thread):
 
         self.robot = robot
 
+        # self.variable = variable
+
+
+
     def run(self):
         self.stop = False
         while not self.stop:
@@ -29,6 +33,10 @@ class ButtonLeftThread(threading.Thread):
             self.robot.setLEDCircle(color) 
             
             self.robot.setLEDTop([0,0,32])
+
+            fonctions.autoTurn(self.robot, motor_speed=50)
+
+            print(self.robot.variable)
 
             print("in Button Left")
 

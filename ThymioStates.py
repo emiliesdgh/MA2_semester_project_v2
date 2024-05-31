@@ -15,6 +15,8 @@ class ThymioStates :
         self.button_right = 0
         self.button_left = 0
 
+        self.variable = True
+
         self.allButtons = []
 
         self.client = ClientAsync()

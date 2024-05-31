@@ -34,7 +34,7 @@ class ButtonFrontThread(threading.Thread):
             color = [24,0,0,0,0,0,0,0]
             self.robot.setLEDCircle(color) 
 
-            self.robot.setLEDTop([0,32,0])
+            self.robot.setLEDTop([32,0,32])
 
             fonctions.no_costume(self.robot, motor_speed=0)
 
