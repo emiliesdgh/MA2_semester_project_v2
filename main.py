@@ -13,8 +13,6 @@ from tdmclient import ClientAsync, aw
 
 import numpy as np
 
-import fonctions
-
 import threading
 import time
 import queue
@@ -53,6 +51,7 @@ if __name__ == "__main__":
                     robot.setSpeedLeft(0)
                     robot.setSpeedRight(0)
                     robot.setLEDTop([0,0,0])
+                    robot.setLEDCircle([0,0,0,0,0,0,0,0])
 
                 if (program is None) and (robot.button_center):
 

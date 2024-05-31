@@ -10,8 +10,7 @@ import numpy as np
 import fonctions
 
 import threading
-import time
-import queue
+
 
 
 class ButtonLeftThread(threading.Thread):

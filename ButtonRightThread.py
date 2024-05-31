@@ -34,7 +34,6 @@ class ButtonRightThread(threading.Thread):
 
             fonctions.accelerometer_effect(self.robot, self.node, motor_speed=100)
 
-
             print("in Button Right")
 
 

@@ -34,7 +34,6 @@ class ButtonBackThread(threading.Thread):
 
             fonctions.ext_interaction(self.robot, motor_speed=100)
 
-
             print("in Button Back")
 
     def kill(self):

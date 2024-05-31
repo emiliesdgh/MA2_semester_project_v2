@@ -37,7 +37,7 @@ class ButtonCenterThread(threading.Thread):
 
             fonctions.stop_program(self.robot)
 
-            time.sleep(2)
+            # time.sleep(2)
 
     def kill(self):
         self.stop = True
