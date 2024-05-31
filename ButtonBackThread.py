@@ -22,6 +22,9 @@ class ButtonBackThread(threading.Thread):
 
         self.robot = robot
         self.node = node
+        self.robot.leftNOTright = robot.leftNOTright
+
+        self.i = 0
 
     def run(self):
         self.stop = False
@@ -32,7 +35,46 @@ class ButtonBackThread(threading.Thread):
 
             self.robot.setLEDTop([32,0,0])
 
-            fonctions.ext_interaction(self.robot, motor_speed=100)
+            if(self.robot.button_left) :
+
+                self.robot.leftNOTright = True
+
+                self.i = 0
+
+                # color = [0,0,0,0,24,0,24,0]
+                # self.robot.setLEDCircle(color) 
+            
+            elif(self.robot.button_right) :
+
+                self.i = 0
+
+                self.robot.leftNOTright = False
+                color = [0,0,24,0,24,0,0,0]
+                self.robot.setLEDCircle(color) 
+
+            if(self.robot.leftNOTright) :
+
+                self.i = self.i + 1
+
+                fonctions.auto_ext_interaction(self.robot, self.i, motor_speed=100)
+                
+                if(self.i == 3) :
+                    self.i = 0
+
+                print(self.i)
+
+                color = [0,0,0,0,24,0,24,0]
+                self.robot.setLEDCircle(color)
+
+            elif(not self.robot.leftNOTright) :
+
+                color = [0,0,24,0,24,0,0,0]
+                self.robot.setLEDCircle(color) 
+                fonctions.ext_interaction(self.robot, motor_speed=100)
+
+
+
+            # fonctions.ext_interaction(self.robot, motor_speed=100)
 
             print("in Button Back")
 
